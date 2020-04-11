@@ -8,7 +8,7 @@ DataType AST::get_datatype() {
     return dt;
 }
 
-int AST::get_int() {
+int AST::get_int() const {
     return std::get<int>(value);
 }
 
@@ -41,5 +41,27 @@ AST::AST(DataType dt, std::vector<AST> v)
 
 AST::AST()
         : dt(DataType::Unexpected) {}
+
+std::ostream &operator<<(std::ostream &os, AST &ast) {
+    switch (ast.get_datatype()){
+        case DataType::Integer:
+            os << "AST{ " << ast.get_int() << " Integer }";
+        case DataType::Double:
+            os << "AST{ " << ast.get_double() << " Double }";
+        case DataType::Keyword:
+            os << "AST{ " << ast.get_string() << " Keyword }";
+        case DataType::Symbol:
+            os << "AST{ " << ast.get_string() << " Symbol }";
+        case DataType::List:
+            os << "AST{ " << ast.get_string() << " List }";
+            for (auto v: ast.get_vector()){
+                os << "  " << v << std::endl;
+            }
+        default:
+            os << "Unexpected";
+
+    }
+    return os;
+}
 
 

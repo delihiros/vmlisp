@@ -6,7 +6,7 @@ int main() {
     while (std::cin >> s) {
         auto lexer = new Lexer(s);
 
-        for (Token token = lexer->next(); token.get_token_type() != TokenType::End; token = lexer->next()) {
+        for (Token token = lexer->next(); token.get_tokentype() != TokenType::End; token = lexer->next()) {
             std::cout << token << std::endl;
         }
     }

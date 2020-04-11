@@ -7,7 +7,7 @@
 Token::Token(std::string s, TokenType tt)
         : s(std::move(s)), tt(tt) {}
 
-TokenType Token::get_token_type() {
+TokenType Token::get_tokentype() {
     return tt;
 }
 

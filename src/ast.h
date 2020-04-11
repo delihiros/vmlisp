@@ -9,10 +9,20 @@
 #include <vector>
 #include <string>
 #include <variant>
+#include <sstream>
+#include <iostream>
 
 enum class DataType {
     Integer,
     Double,
+    Symbol,
+    Keyword,
+    String,
+    List,
+    Vector,
+    Set,
+    HashMap,
+    Program,
     Unexpected
 };
 
@@ -35,13 +45,15 @@ public:
 
     DataType get_datatype();
 
-    int get_int();
+    int get_int() const;
 
     double get_double();
 
     std::string get_string();
 
     std::vector<AST> get_vector();
+
+    friend std::ostream &operator<<(std::ostream &os, AST &ast);
 };
 
 #endif //VMLISP_AST_H

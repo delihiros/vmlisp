@@ -18,7 +18,9 @@ public:
 
     explicit Parser(Lexer *lex);
 
-    AST parse();
+    AST parse_expr();
+    
+    AST parse_program();
 
 private:
     bool next_token();
@@ -26,6 +28,20 @@ private:
     AST parse_integer();
 
     AST parse_double();
+
+    AST parse_symbol();
+
+    AST parse_keyword();
+
+    AST parse_string();
+
+    AST parse_list();
+
+    AST parse_vector();
+
+    AST parse_set();
+
+    AST parse_hashmap();
 };
 
 #endif //VMLISP_PARSER_H

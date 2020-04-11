@@ -14,19 +14,16 @@ Token Lexer::next() {
 
     if (peek() == '\0') {
         return end();
-    } else if (is_special(peek())) {
-        if (peek() == '-' && is_digit(peek_forward())) {
-            return numeral();
-        } else if (peek() == '/' && peek_forward() == '/') {
-            return comment();
-        }
-        return special_symbol();
     } else if (is_digit(peek())) {
         return numeral();
     } else if (peek() == ':') {
         return keyword();
     } else if (is_alpha(peek())) {
         return symbol();
+    } else if (peek() == '#' && peek_forward() == '{') {
+        forward();
+        forward();
+        return Token("#{", TokenType::LSharp);
     } else if (peek() == '(') {
         forward();
         return Token("(", TokenType::LParen);
@@ -47,13 +44,19 @@ Token Lexer::next() {
         return Token("]", TokenType::RSquare);
     } else if (peek() == '"') {
         return string();
+    } else if (is_special(peek())) {
+        if (peek() == '-' && is_digit(peek_forward())) {
+            return numeral();
+        } else if (peek() == '/' && peek_forward() == '/') {
+            return comment();
+        }
+        return special_symbol();
     }
-
     return Token("", TokenType::Unexpected);
 }
 
 bool Lexer::is_space(char c) {
-    return c == ' ' || c == '\t' || c == '\n';
+    return c == ' ' || c == '\t' || c == '\n' || c == ',';
 }
 
 bool Lexer::is_alpha(char c) {

@@ -23,6 +23,7 @@ enum class TokenType {
     RSquare,
     LCurly,
     RCurly,
+    LSharp,
     End,
     Unexpected
 };
@@ -35,7 +36,7 @@ public:
 
     Token(std::string s, TokenType tt);
 
-    TokenType get_token_type();
+    TokenType get_tokentype();
 
     std::string get_string();
 
